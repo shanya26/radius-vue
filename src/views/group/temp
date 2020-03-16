@@ -1,0 +1,73 @@
+<template>
+  <CSidebar  
+        :fixed="sideBar.fixed" 
+        :minimize="sideBar.minimize"
+        :show="sideBar.show"
+        :colorScheme = sideBar.colorScheme
+      >  
+      <CSidebarBrand class="d-md-down-none" to="/">
+           
+        </CSidebarBrand>
+        <CRenderFunction flat :content-to-render="groups"/>     
+      </CSidebar>
+     
+</template>
+
+
+<script>  
+  export default {
+    props:['showRadiusform','action','item'],
+    mounted(){
+       this.getGroupList()
+    },
+    data() {
+      return {
+       groups:[],
+       minimize: false,
+       sideBar:{
+          minimize: false,
+          open:'responsive',
+          show: 'responsive',
+          aside:false,
+          fixed:false,
+          overlaid:false,
+          colorScheme:"light",
+          dropdownMode:"closeInactive",
+          hideOnMobileClick:true,
+          commuties:['mikrotik_pre_6.43'],
+          sideBarData:{  
+          },
+          dealers:[],
+          secretdesc:"0 to 31 characters remaining"
+        }
+      }    
+    },
+    computed:{
+      message(){
+            return this.$store.getters.message
+      },
+      status(){
+          return this.$store.getters.apiStatus  
+      }
+    },
+    methods: {      
+      getGroupList(){
+        this.groups = [
+          {
+            _name: 'CSidebarNav',
+            _children: [
+              {
+                _name: 'CSidebarNavItem',
+                name: 'Group2'
+              }, 
+              {
+                _name: 'CSidebarNavItem',
+                name: 'Group1'
+              }        
+            ]
+          }
+        ]
+      }
+    }
+  }
+</script>
